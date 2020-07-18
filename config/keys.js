@@ -1,3 +1,3 @@
 module.export = {
-    db: "mongodb+srv://jay:<password>@urlooker.xozuz.mongodb.net/<dbname>?retryWrites=true&w=majority"
+    db: "mongodb+srv://<user>:<password>@urlooker.xozuz.mongodb.net/<dbname>?retryWrites=true&w=majority"
 };
