@@ -13,7 +13,7 @@ app.use('/api/', endpoints);
 // Connect to MongoDB and listen on port
 
 mongoose.connect(db, { useNewUrlParser: true, useUnifiedTopology: true })
-    .then(() => console.log("MongoDB Connected..."))
+    .then(() => console.log(`${new Date(Date.now())} - MongoDB Connected...`))
     .catch((error) => console.log(error))
-    .finally(() => app.listen(5000, () => console.log('Listening on port: 5000')));
+    .finally(() => app.listen(5000, () => console.log(`${new Date(Date.now())} - Listening on port: 5000`)));
 

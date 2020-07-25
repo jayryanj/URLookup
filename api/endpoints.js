@@ -11,7 +11,7 @@ const ERROR = 500;
  *  route:  GET /api/
  */
 router.get('/', (request, response) => {
-    response.status(OK).json({success: true});
+    response.status(OK).json({message: "Hello, welcome to URLooker API"});
 })
 
 router.put('/', (request, response) => {
@@ -23,8 +23,9 @@ router.put('/', (request, response) => {
  *  desc:   Will scan the URL passed in the request body.
  */
 router.post('/lookup/', (request, response) => {
-    scan(request.body.url).then((data) => {
-        response.status(OK).json(data)
+    console.log(`${new Date(Date.now())} - Received URL: ${request.body.url}`)
+    scan(request.body.url).then(results => {
+        response.status(OK).json(results)
     })
 })
 

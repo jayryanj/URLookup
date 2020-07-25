@@ -8,39 +8,15 @@ const bodyParser = require('body-parser');
 
 const testURL = "testsafebrowsing.appspot.com/s/phishing.html" // Only for testing
 
-function scan(url) {
-  
-  return submitAPI(url)
-    .then((url) => {
-      return resultsAPI(url)
-    })
-    .catch(error => console.log(error))
-}
+async function scan(url) {
+  let submitResults = await submitAPI(url);
+  console.log(`${new Date(Date.now())} - Response received: `);
+  console.log(submitResults.data);
 
-/*
-function googleSafeBrowsing(url) {
-  const data = {
-    "client": {
-        "clientId":      "URLooker",
-        "clientVersion": `${version}`
-      },
-      "threatInfo": {
-        "threatTypes": [
-            "MALWARE",
-            "SOCIAL_ENGINEERING",
-            "POTENTIALLY_HARMFUL_APPLICATION",
-            "UNWANTED_SOFTWARE"
-        ],
-        "platformTypes": ["ANY_PLATFORM"],
-        "threatEntryTypes": ["URL"],
-        "threatEntries": [
-          {"url": `${url}`}
-        ]
-      }
+  let results = await resultsAPI(submitResults.data.api);
+  console.log(results.data.verdicts.overall);
+  return results.data;
 }
-  return axios.post(`https://safebrowsing.googleapis.com/v4/threatMatches:find?key=${Keys.gsbKey}`, data)
-    .then((results) => { return results.data });
-}*/
 
 function submitAPI(url) {
   const config = {
@@ -50,29 +26,25 @@ function submitAPI(url) {
     }
   };
 
-  const data = {
+  let data = {
     "url": url,
     "visibility": "unlisted"
   };
 
-  return axios.post("https://urlscan.io/api/v1/scan/", data, config)
-    .then((response) => {
-      return response.data.api;
-     })
-    .catch(error => {
-      console.log("Oh no!");
-      console.log(error);
-    })
+  console.log(`${new Date(Date.now())} - Sending request to urlscan.io submission API`)
+
+  return axios.post("https://urlscan.io/api/v1/scan/", data, config);;
 }
 
-function resultsAPI(url) {
-  return axios.get(url)
-    .then(response => { 
-      return response.data 
-    })
-    .catch( error => {
-      console.log(error);
-    });
+async function resultsAPI(url) {
+  return new Promise(res => {
+    console.log(`${new Date(Date.now())} - Waiting 25s for urlscan.io to generate results`)
+    setTimeout(() => {
+        console.log(`${new Date(Date.now())} - Requesting results from: ${url}`)
+        res(axios.get(url));
+    }, 25000)
+  })
 }
+
 
 module.exports = scan;
