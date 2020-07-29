@@ -1,0 +1,26 @@
+
+body {
+  background-color: #1d211d !important;
+}
+
+.App {
+  text-align: center;
+}
+
+.inputBar, input {
+  background-color: rgba(0, 0, 0, 0) !important;
+  border-radius: 0px !important;
+  color: white !important;
+  border-width: 0.5px !important;
+}
+
+.inputBar:focus {
+  outline: none !important;
+}
+
+input:focus, input:active, input:hover {
+  outline: 0px !important;
+  -webkit-appearance: none;
+  box-shadow: none !important;
+}
+

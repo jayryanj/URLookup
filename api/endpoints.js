@@ -24,9 +24,14 @@ router.put('/', (request, response) => {
  */
 router.post('/lookup/', (request, response) => {
     console.log(`${new Date(Date.now())} - Received URL: ${request.body.url}`)
-    scan(request.body.url).then(results => {
-        response.status(OK).json(results)
-    })
+    scan(request.body.url)
+        .then(results => {
+            console.log(`${new Date(Date.now())} - Sending back response to client.`)
+            response.status(OK).json(results)
+        })
+        .catch(error => {
+            response.status(BAD_REQUEST).json({success: false})
+        })
 })
 
 module.exports = router;
