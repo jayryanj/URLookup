@@ -1,6 +1,9 @@
 # URLooker
 ## Description
-URLooker is a web app designed to check a website URL for threats by wrapping around urlscan.io's API for simple and concise results. 
+URLooker is a web app designed to check a website URL for threats by wrapping around urlscan.io's API for simple and concise results. Currently, under rebranding because "URLooker" is taken :(
+
+## Deployment
+URLooker is pending deployment to Heroku.
 
 ## How to Contribute
 Fork the repo, clone it to your local machine, then run:
