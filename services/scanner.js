@@ -12,37 +12,32 @@ const testURL = "testsafebrowsing.appspot.com/s/phishing.html" // Only for testi
 async function scan(url) {
   let response = {};
 
-  // Submit URL to be scanned by urlscan.io
+  // Submit URL to be scanned by the submission API
   let submitResults = await submitAPI(url);
 
   console.log(`${new Date(Date.now())} - Response received: `);
   console.log(submitResults.data);
 
-  // Retrieve the scan results of the URL from urlscan.io
+  // Retrieve the scan results of the URL from results API
   try {
     let scanResults = await resultsAPI(submitResults.data.api, 25000);
-
     response = {
       verdict: scanResults.data.verdicts.overall,
       location: scanResults.data.meta.processors.geoip.data
     }
-
     return response;
-
   } catch(error) {
     console.log(`${new Date(Date.now())} - Call failed, retrying...`);
-
     try {
       let ScanResults = await resultsAPI(submitResults.data.api, 10000);
-
       response = {
         verdict: scanResults.data.verdicts.overall,
         location: scanResults.data.meta.processors.geoip.data
       }
-  
       return response;
     } catch(error) {
-      return 
+      console.log(`${new Date(Date.now())} - Unsuccessful call:\n${error}`)
+      return {success: false};
     }
 
   }

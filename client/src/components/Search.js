@@ -1,26 +1,39 @@
+// Useless for now
+
 import React, { Component } from 'react';
-import { Form, Input, Container, InputGroup, InputGroupAddon, InputGroupText } from 'reactstrap';
+import { Input, Container, Form, InputGroup, Button } from 'reactstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../App.css';
 
 class Search extends Component {
     constructor(props) {
         super(props);
+
+        this.onChangeUrl = this.onChangeUrl.bind(this);
+        this.onSubmit = this.onSubmit.bind(this);
+
         this.state = {
-            url: ''
+            url: '',
+            isLoading = false;
+            isDone = false;
         };
     }
+
+    onSubmit(e) {
+        e.preventDefault();
+
+        // For Testing
+        console.log(`Form submitted.`);
+        console.log(`URL: ${this.state.url}`);
+    }
+
+    onChangeUrl(e) {
+        this.setState({url: e.target.value});
+    }
+
     render() {
         return (
             <div className="Search">
-                <Container>
-                    <InputGroup classname="inputBar">
-                        <InputGroupAddon addonType="append">
-                            <InputGroupText>Search</InputGroupText>
-                        </InputGroupAddon>
-                        <Input placeholder="URL to check..." />
-                    </InputGroup>
-                </Container>
             </div>
         );
     }

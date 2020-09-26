@@ -3,12 +3,14 @@ const Lookup = require('../models/lookup');
 const scan = require('../services/scanner');
 const { request, response } = require('express');
 
+// Response statuses
 const OK = 200;
 const BAD_REQUEST = 400;
 const ERROR = 500;
 
 /**
  *  route:  GET /api/
+ *  desc:   Will return a welcome message. Mostly for testing.
  */
 router.get('/', (request, response) => {
     response.status(OK).json({message: "Hello, welcome to URLooker API"});

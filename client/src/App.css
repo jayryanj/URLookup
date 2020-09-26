@@ -1,21 +1,32 @@
 
+@font-face {
+  font-family: Montserrat-regular;
+  src: url('./resources/Montserrat-Regular.ttf');
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: Montserrat-bold;
+  src: url('./resources/Montserrat-Bold.ttf');
+  font-weight: bold;
+}
+
 body {
-  background-color: #1d211d !important;
+  background-color: #243036 !important;
+  background: url('./resources/URLooker_background3.png') no-repeat center center fixed !important;
+  background-size: cover;
+  color: rgb(187, 187, 187) !important;
+  overflow-x: hidden;
 }
 
-.App {
-  text-align: center;
-}
-
-.inputBar, input {
-  background-color: rgba(0, 0, 0, 0) !important;
-  border-radius: 0px !important;
-  color: white !important;
-  border-width: 0.5px !important;
-}
-
-.inputBar:focus {
-  outline: none !important;
+input {
+  border-radius: 20px !important;
+  border-width: 0px !important;
+  margin-top: 2% !important;
+  margin-left: 10% !important;
+  margin-right: 10% !important;
+  box-shadow: 0 0 10px 1px #11171b ;
+  font-family: Montserrat-regular;
 }
 
 input:focus, input:active, input:hover {
@@ -23,4 +34,127 @@ input:focus, input:active, input:hover {
   -webkit-appearance: none;
   box-shadow: none !important;
 }
+
+h1 {
+  font-family: Montserrat-regular;
+  font-size: 50px !important;
+  color: #c8d2d6 !important;
+  margin-left: 20%;
+  width: fit-content;
+  padding: 10px;
+  /*background-color: #cad2c5;
+  box-shadow: 0 0 6px 1px #1a2227;
+  backdrop-filter: blur(10px) !important;*/
+}
+
+.description {
+  font-family: Montserrat-bold;
+  text-align: left;
+  margin-top: 12% !important;
+  padding-left: 10% !important;
+  padding-right: 25% !important;
+}
+
+.description h2 {
+  color: #958676 !important;
+  font-size: 40px;
+  margin-bottom: 5%;
+}
+
+.description p {
+  color: #596970 !important;
+  font-size: 14px;
+  margin-top: 5%;
+  margin-bottom: 10%;
+}
+
+.inputButton {
+  font-family: Montserrat-bold;
+  color: #c8d2d6 !important;
+  background-color: #958676 !important;
+  border-radius: 20px !important;
+  padding: 8px 40px !important;
+  margin-top: 6%;
+  margin-left: 10% !important;
+  box-shadow: 0 0 10px 1px #11171b ;
+  border-width: 0px !important;
+}
+
+.inputButton:hover {
+  background-color: #807365 !important;
+  box-shadow: none !important;
+  color: #b9c3c7 !important;
+}
+
+.Card {
+  background-color: black !important;
+}
+
+.Results {
+  border-radius: 20px !important;
+  box-shadow: 0 0 10px 1px #1c262c ;
+  margin-top: 10%;
+  margin-right: 15%;
+  margin-left: 10%;
+  background: rgba(255,255,255,0.05) !important;
+  font-family: Montserrat-regular;
+  text-align: center;
+  position: absolute;
+}
+
+.resultsGraphic {
+  max-width: 30%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.Results h2 {
+  font-size: 48px;
+  text-align: center;
+  font-family: Montserrat-bold;
+}
+
+.Results h4 {
+  font-size: 20px;
+  text-align: left;
+}
+
+@keyframes slide {
+  0%{transform: translate(100%)}
+  100%{transform: translate(0%)}
+}
+
+.results-loaded {
+  animation-name: slide;
+  animation-duration: 0.75s;
+}
+
+.resultStats {
+  padding-right: 8%;
+  padding-left: 8%;
+  padding-top: 5%;
+  text-align: left;
+}
+
+.results-url {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: fit-content;
+  font-size: 14px;
+}
+
+.results-url-title {
+  color: #958676 !important;
+}
+
+
+
+
+
+
+
+
+
+
 
