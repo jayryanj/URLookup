@@ -104,7 +104,7 @@ class App extends Component {
       <div className="App">
         <Navbar>
           <NavbarBrand href="/" className="mr-auto">
-            <h1>URLooker</h1>
+            <h1>URLookup</h1>
           </NavbarBrand>
           <Nav pullRight>
 
