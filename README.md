@@ -1,4 +1,4 @@
-# URLooker
+# URLookup
 ## Description
 URLookup is a web app designed to check a website URL for threats by wrapping around urlscan.io's API for simple and concise results. 
 
