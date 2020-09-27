@@ -16,7 +16,9 @@ Fork the repo, clone it to your local machine, then run:
 ```
 npm install
 ```
-to install the dependencies. Once you've got that setup, you can run either the back-end, front-end, or both using the following commands.
+to install the dependencies. Once you've got that setup, you must contact me for API keys.
+
+You can run either the back-end, front-end, or both using the following commands.
 
 To run the back-end:
 ```
@@ -28,7 +30,7 @@ To run the front-end:
 npm run client
 ```
 
-To run both front-end and back-end:
+To run the entire project (both front-end and back-end):
 ```
 npm run dev
 ```
