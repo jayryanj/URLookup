@@ -1,7 +1,6 @@
 // Imports
 const express = require('express');
 const mongoose = require('mongoose');
-const db = require('./config/keys').db;
 const endpoints = require('./api/endpoints');
 const path = require('path');
 
