@@ -17,20 +17,20 @@ Fork the repo, clone it to your local machine, then run:
 npm install
 ```
 to install the dependencies. Once you've got that setup, you must contact me for API keys.
+You can run either the back-end or front-end with the following commands.
 
-You can run either the back-end, front-end, or both using the following commands.
-
-To run the back-end:
+Back-end:
 ```
 npm run api
 ```
 
-To run the front-end:
+Front-end:
 ```
 npm run client
 ```
 
-To run the entire project (both front-end and back-end):
+To run the entire project (front-end and back-end):
 ```
 npm run dev
 ```
+When you have the project on your local machine, go to the Issue pr Project sections on Github to see what needs to be accomplished.
