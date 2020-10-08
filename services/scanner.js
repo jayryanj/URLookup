@@ -2,12 +2,15 @@
 // APIs: Google Safe Browsing, VirusTotal, urlscan.io, Google Web Risk, scanii
 // Need to respect and handle redirects (301, 308) and too many requests (429)
 const axios = require('axios');
-const Keys = require('../config/keys');
 const version = require('../package.json').version;
 const bodyParser = require('body-parser');
+const dotenv = require('dotenv');
+const fs = require('fs');
 
 const testURL = "testsafebrowsing.appspot.com/s/phishing.html" // Only for testing
 
+// Initialize environment variables
+dotenv.config();
 
 async function scan(url) {
   let response = {};
@@ -55,7 +58,7 @@ function submitAPI(url) {
   const config = {
     headers: {
       "Content-Type": "application/json",
-      "API-Key": `${Keys.urlscanKey}`
+      "API-Key": `${process.env.URLSCAN_KEY}`
     }
   };
 
