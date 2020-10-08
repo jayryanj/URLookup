@@ -3,6 +3,8 @@ const express = require('express');
 const mongoose = require('mongoose');
 const endpoints = require('./api/endpoints');
 const path = require('path');
+const dotenv = require('dotenv');
+dotenv.config();
 
 const app = express();
 
@@ -34,5 +36,5 @@ mongoose.connect(db, { useNewUrlParser: true, useUnifiedTopology: true })
 */
 
 // Remove this once Mongo is implemented
-app.listen(5000, () => console.log(`${new Date(Date.now())} - Listening on port: 5000`));
+app.listen(process.env.PORT, () => console.log(`${new Date(Date.now())} - Listening on port: 5000`));
 
