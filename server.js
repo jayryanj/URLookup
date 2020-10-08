@@ -21,10 +21,10 @@ app.use(function(req, res, next) {
 // Pass API calls to endpoints.js
 app.use('/api/', endpoints);
 
-app.use(express.static(path.join(__dirname, './build')))
+app.use(express.static(path.join(__dirname, '/client/build')));
 
 app.get('*', (req , res) => {
-  res.sendFile(path.join(__dirname, './client/build/'))
+  res.sendFile(path.join(__dirname, '/client/build'))
 });
 
 // Connect to MongoDB and listen on port
@@ -36,5 +36,5 @@ mongoose.connect(db, { useNewUrlParser: true, useUnifiedTopology: true })
 */
 
 // Remove this once Mongo is implemented
-app.listen(process.env.PORT, () => console.log(`${new Date(Date.now())} - Listening on port: 5000`));
+app.listen(process.env.PORT, () => console.log(`${new Date(Date.now())} - Listening on port: ${process.env.PORT}`));
 
