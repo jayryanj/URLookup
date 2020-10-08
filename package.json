@@ -7,7 +7,8 @@
     "start": "node server.js",
     "api": "nodemon server.js",
     "client": "npm start --prefix client",
-    "dev": "concurrently \"npm run api\" \"npm run client\""
+    "dev": "concurrently \"npm run api\" \"npm run client\"",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install && npm run build --prefix client" 
   },
   "author": "Jay Ryan Jamorabon",
   "license": "MIT",
@@ -23,5 +24,6 @@
     "react-dom": "^16.13.1",
     "react-scripts": "^3.4.3",
     "reactstrap": "^8.6.0"
-  }
+  },
+  "proxy": "http://localhost:5000"
 }
