@@ -7,7 +7,6 @@ import {
   Navbar, 
   NavbarBrand,
   Nav,
-  NavItem, 
   Row, 
   Col, 
   Form, 
@@ -35,7 +34,7 @@ class App extends Component {
       verdict: {
         malicious: false,
         score: 100,
-        categories: ["malware"]
+        categories: ["malware", "phishing"]
       }
     }
 
@@ -43,8 +42,8 @@ class App extends Component {
     this.submittedUrl = "";
 
     this.state = {
-        url: '',
-        results: null, // TODO: Remove after testing
+        url: '', // TODO: set to '' after testing
+        results: null, // TODO: Change to null after testing
         isLoading: false,
     };
 }
@@ -90,7 +89,7 @@ class App extends Component {
     let resultsCard;
 
     if(this.state.results == null && !this.state.isLoading) {
-      resultsCard = <p>No results</p>
+      resultsCard = <img className='laptop-image' src={require("./resources/laptop.png")} />
     } else {
       if(this.state.isLoading) {
         resultsCard = <Spinner className="resultsLoading" style={{ width: '3rem', height: '3rem' }} /> 
@@ -113,7 +112,7 @@ class App extends Component {
 
           <Row>
 
-            <Col>
+            <Col lg className='column1'>
                 <Container className="description">
                   <h2>Check a URL for threats</h2>
                   <Container>
@@ -142,7 +141,7 @@ class App extends Component {
 
             </Col>
 
-            <Col>
+            <Col lg className='column2'>
               <Container>
                 <div ref={this.wrapperRef}>
                   {resultsCard}

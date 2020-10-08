@@ -3,7 +3,7 @@
 import React, { Component } from 'react';
 import '../App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Card, CardBody, CardImg, CardText, CardTitle } from 'reactstrap';
+import { Card, CardBody, CardImg } from 'reactstrap';
 
 class Results extends Component {
 
@@ -33,11 +33,13 @@ class Results extends Component {
                             <h2>Looks Safe!</h2>
                             <p style={{textAlign: "center"}}>No threats have been detected.</p>
                             <div className="resultStats">
-                                <h4 className="results-url-title">Submitted URL: </h4>
-                                <p className="results-url">
-                                    {
-                                        this.props.url
-                                    }
+                                <h4 className="results-h4">Submitted URL: </h4>
+                                <p className="results-p">
+                                    {this.props.url}
+                                </p>
+                                <h4 className='results-h4'>Threat Score:</h4>
+                                <p className="results-p results-threat-score">
+                                    {this.state.threat_score} / 100
                                 </p>
                             </div>
                         </CardBody>
@@ -49,20 +51,26 @@ class Results extends Component {
                             <h2>Looks Suspicious!</h2>
                             <p style={{textAlign: "center"}}>Possible threats have been detected with this submission</p>
                             <div className="resultStats">
-                                <h4 className="results-url-title">Submitted URL: </h4>
-                                <p className="results-url">
-                                    {
-                                        this.props.url
-                                    }
+                                <h4 className="results-h4">Submitted URL: </h4>
+                                <p className="results-p">
+                                    {this.props.url}
                                 </p>
+
+                                <h4 className='results-h4'>Threat Score: </h4>
+                                <p className="results-p results-threat-score">
+                                    {this.state.threat_score} / 100
+                                </p>
+
+                                <h4 className='results-h4'>Threat Categories:</h4>
+                                <ul className='results-p'>
+                                    {
+                                        this.state.categories.map(function(type) {
+                                            return <li>{type}</li>
+                                        })
+                                    }
+                                </ul>
                             </div>
-                            <ul>
-                                {
-                                    this.state.categories.map(function(type) {
-                                        return <li>{type}</li>
-                                    })
-                                }
-                            </ul>
+                            
 
                         </CardBody>
                     </Card>

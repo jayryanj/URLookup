@@ -13,12 +13,14 @@
 
 body {
   background-color: #243036 !important;
-  background: url('./resources/URLooker_background3.png') no-repeat center center fixed !important;
-  background-size: cover;
+  background: url('./resources/pexels-pixabay-533424.jpg') no-repeat center center fixed !important;
+  background-size: cover !important;
   color: rgb(187, 187, 187) !important;
   overflow-x: hidden;
+  padding-bottom: 5%;
 }
 
+/* Input bar */
 input {
   border-radius: 20px !important;
   border-width: 0px !important;
@@ -35,6 +37,8 @@ input:focus, input:active, input:hover {
   box-shadow: none !important;
 }
 
+
+/* Title */
 h1 {
   font-family: Montserrat-regular;
   font-size: 50px !important;
@@ -47,12 +51,13 @@ h1 {
   backdrop-filter: blur(10px) !important;*/
 }
 
+/* Description */
 .description {
   font-family: Montserrat-bold;
   text-align: left;
-  margin-top: 12% !important;
   padding-left: 10% !important;
   padding-right: 25% !important;
+  margin-top: 5% !important;
 }
 
 .description h2 {
@@ -62,9 +67,8 @@ h1 {
 }
 
 .description p {
-  color: #596970 !important;
-  font-size: 14px;
-  margin-top: 5%;
+  color: #8d9ba1 !important;
+  font-size: 18px;
   margin-bottom: 10%;
 }
 
@@ -93,10 +97,9 @@ h1 {
 .Results {
   border-radius: 20px !important;
   box-shadow: 0 0 10px 1px #1c262c ;
-  margin-top: 10%;
   margin-right: 15%;
   margin-left: 10%;
-  background: rgba(255,255,255,0.05) !important;
+  background: rgba(17, 17, 17, 0.7) !important;
   font-family: Montserrat-regular;
   text-align: center;
   position: absolute;
@@ -136,19 +139,33 @@ h1 {
   text-align: left;
 }
 
-.results-url {
+.results-p {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   max-width: fit-content;
-  font-size: 14px;
+  font-size: 16px;
+  margin-bottom: 5% !important;
 }
 
-.results-url-title {
+.results-h4 {
   color: #958676 !important;
+  font-size: 25px !important;
 }
 
+.results-threat-score {
+  font-size: 25px;
+}
 
+.laptop-image {
+  width: 560px;
+  margin-left: 6%;
+}
+
+/* Columns */
+.column1, .column2 {
+  margin-top: 4% !important;
+}
 
 
 
