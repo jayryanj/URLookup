@@ -17,6 +17,7 @@ import {
 } from 'reactstrap';
 import Results from './components/Results';
 const axios = require('axios');
+const validURL = require('valid-url');
 
 class App extends Component {
 
@@ -28,15 +29,16 @@ class App extends Component {
     this.onChangeUrl = this.onChangeUrl.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
     this.render = this.render.bind(this);
+    this.callAPI = this.callAPI.bind(this);
 
-    // TEST RESULTS
+    /* TEST RESULTS
     let testResults = {
       verdict: {
         malicious: false,
         score: 100,
         categories: ["malware", "phishing"]
       }
-    }
+    } */
 
     // Used for the results card to prevent it from changing when a new submissions is entered
     this.submittedUrl = "";
@@ -45,12 +47,13 @@ class App extends Component {
         url: '', // TODO: set to '' after testing
         results: null, // TODO: Change to null after testing
         isLoading: false,
+        isValidUrl: true
     };
-}
+  }
 
-  async onSubmit(e) {
-    e.preventDefault();
+  async callAPI() {
     const wrapper = this.wrapperRef.current;
+
     let data = {
       "url": this.state.url
     }
@@ -60,9 +63,7 @@ class App extends Component {
         "Content-Type": "application/json"
       }
     };
-
     this.setState({isLoading: true});
-
     this.submittedUrl = this.state.url;
 
     // For Testing
@@ -79,8 +80,21 @@ class App extends Component {
     wrapper.classList.toggle("results-loaded");
   }
 
+  async onSubmit(e) {
+    e.preventDefault();
+
+    if(validURL.isWebUri(this.state.url)){
+      this.callAPI();
+
+    } else {
+      this.setState({isValidUrl: false});
+    }
+  
+  }
+
   onChangeUrl(e) {
       this.setState({url: e.target.value});
+      this.setState({isValidUrl: true})
   }
 
   render() {
@@ -89,7 +103,7 @@ class App extends Component {
     let resultsCard;
 
     if(this.state.results == null && !this.state.isLoading) {
-      resultsCard = <img className='laptop-image' src={require("./resources/laptop.png")} />
+      resultsCard = <img alt='laptop-graphic' className='laptop-image' src={require("./resources/laptop.png")} />
     } else {
       if(this.state.isLoading) {
         resultsCard = <Spinner className="resultsLoading" style={{ width: '3rem', height: '3rem' }} /> 
@@ -117,16 +131,24 @@ class App extends Component {
                   <h2>Check a URL for threats</h2>
                   <Container>
                     <p>
-                      The web is a dangerous landscape. Websites can pose a major security threat for unsuspecting victims. Submit a suspicious URL, and we'll take a look by scanning for any threats. <br/><br/>Note: Do not submit any URLs that contain sensitive information 
+                      The web is a dangerous landscape. Websites can pose a major security threat for unsuspecting victims. Submit a suspicious URL, and we'll take a look by scanning for any threats. <br/><br/>Note: Do not submit any URLs that contain sensitive information.
                     </p>
                   </Container>
                 </Container>
 
                 <Container className="inputContainer">
                     <Form onSubmit={this.onSubmit}>
-                        <InputGroup>
+                        {
+                          this.state.isValidUrl ?
+                          <InputGroup>
                             <Input onChange={this.onChangeUrl} bsSize="lg" placeholder="https://www.example.com/..." />
-                        </InputGroup>
+                          </InputGroup>
+                          :
+                          <InputGroup>
+                            <Input invalid onChange={this.onChangeUrl} bsSize="lg" placeholder="https://www.example.com/..." />
+                            
+                          </InputGroup>
+                        }
                         {
                           this.state.isLoading ? 
                             <Spinner className="buttonLoading" style={{ width: '3rem', height: '3rem' }} /> 

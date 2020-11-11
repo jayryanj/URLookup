@@ -16,34 +16,52 @@ async function scan(url) {
   let response = {};
 
   // Submit URL to be scanned by the submission API
-  let submitResults = await submitAPI(url);
-
-  console.log(`${new Date(Date.now())} - Response received: `);
-  console.log(submitResults.data);
-
-  // Retrieve the scan results of the URL from results API
   try {
-    let scanResults = await resultsAPI(submitResults.data.api, 25000);
-    response = {
-      verdict: scanResults.data.verdicts.overall,
-      location: scanResults.data.meta.processors.geoip.data
-    }
-    return response;
-  } catch(error) {
-    console.log(`${new Date(Date.now())} - Call failed, retrying...`);
+    let submitResults = await submitAPI(url);
+
+    console.log(`${new Date(Date.now())} - Response received: `);
+    console.log(submitResults.data);
+  
+    // Retrieve the scan results of the URL from results API
     try {
-      let ScanResults = await resultsAPI(submitResults.data.api, 10000);
+  
+      let scanResults = await resultsAPI(submitResults.data.api, 25000);
+  
       response = {
+        success: true,
         verdict: scanResults.data.verdicts.overall,
         location: scanResults.data.meta.processors.geoip.data
       }
+  
       return response;
+  
     } catch(error) {
-      console.log(`${new Date(Date.now())} - Unsuccessful call:\n${error}`)
-      return {success: false};
+  
+      console.log(`${new Date(Date.now())} - Call failed, retrying...`);
+  
+      try {
+  
+        let ScanResults = await resultsAPI(submitResults.data.api, 10000);
+  
+        response = {
+          verdict: scanResults.data.verdicts.overall,
+          location: scanResults.data.meta.processors.geoip.data
+        }
+  
+        return response;
+  
+      } catch(error) {
+  
+        console.log(`${new Date(Date.now())} - Unsuccessful call:\n${error}`)
+  
+        return {success: false};
+      }
+  
     }
-
+  } catch (error) {
+    console.log(`${new Date(Date.now())} - Unsuccessful call:\n${error}`)
   }
+
 }
 
 
@@ -52,7 +70,7 @@ async function scan(url) {
  *              submissions API. By default, the visibility is unlisted.
  * 
  * @param       {String} url - The URL received from the user to scan.
- * @returns     {Promise} Promise that will be fulfilled/rejected according to axios results
+ * @returns     {Promise} Promise for response from the urlscan.io API
  */
 function submitAPI(url) {
   const config = {
@@ -63,7 +81,7 @@ function submitAPI(url) {
   };
 
   let data = {
-    "url": url,
+    "url": url, // Change back to url after testing
     "visibility": "unlisted"
   };
 

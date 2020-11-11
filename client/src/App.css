@@ -43,7 +43,6 @@ h1 {
   font-family: Montserrat-regular;
   font-size: 50px !important;
   color: #c8d2d6 !important;
-  margin-left: 20%;
   width: fit-content;
   padding: 10px;
   /*background-color: #cad2c5;
@@ -89,6 +88,7 @@ h1 {
   box-shadow: none !important;
   color: #b9c3c7 !important;
 }
+
 
 .Card {
   background-color: black !important;
