@@ -95,14 +95,21 @@ function submitAPI(url) {
  * @param {String} url - The URL to the results of the scan. 
  */
 async function resultsAPI(url, ms) {
+  
   // Uses a promise to return the value from the callback passed to setTimeout
-  return new Promise(res => {
+  return new Promise(resolve => {
+
     console.log(`${new Date(Date.now())} - Waiting ${ms/1000}s for urlscan.io to generate results`)
+
     setTimeout(() => {
+
         console.log(`${new Date(Date.now())} - Requesting results from: ${url}`)
-        res(axios.get(url));
+        resolve(axios.get(url));
+
     }, ms)
+
   })
+
 }
 
 

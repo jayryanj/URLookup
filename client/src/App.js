@@ -71,7 +71,7 @@ class App extends Component {
     console.log(`URL: ${this.state.url}`);
     
     
-    let response = await axios.post('/api/lookup/', data, config);
+    let response = await axios.post('http://127.0.0.1:5000/api/lookup/', data, config);
 
     this.setState({results: response.data});
     this.setState({isLoading: false});

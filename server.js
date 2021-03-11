@@ -1,7 +1,7 @@
 // Imports
 const express = require('express');
 const mongoose = require('mongoose');
-const endpoints = require('./api/endpoints');
+const controller = require('./api/controller');
 const path = require('path');
 const dotenv = require('dotenv');
 dotenv.config();
@@ -18,22 +18,8 @@ app.use(function(req, res, next) {
   next();
 }); 
 
-// Pass API calls to endpoints.js
-app.use('/api/', endpoints);
-
-app.use(express.static(path.join(__dirname, '/client/build')));
-
-app.get('*', (req , res) => {
-  res.sendFile(path.join(__dirname, '/client/build'))
-});
-
-// Connect to MongoDB and listen on port
-/**
-mongoose.connect(db, { useNewUrlParser: true, useUnifiedTopology: true })
-    .then(() => console.log(`${new Date(Date.now())} - MongoDB Connected...`))
-    .catch((error) => console.log(error))
-    .finally(() => app.listen(5000, () => console.log(`${new Date(Date.now())} - Listening on port: 5000`)));
-*/
+// Pass API calls to the controller
+app.use('/api/', controller);
 
 // Remove this once Mongo is implemented
 app.listen(process.env.PORT, () => console.log(`${new Date(Date.now())} - Listening on port: ${process.env.PORT}`));
