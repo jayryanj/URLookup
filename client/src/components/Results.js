@@ -4,6 +4,8 @@ import React, { Component } from 'react';
 import '../App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Card, CardBody, CardImg } from 'reactstrap';
+import checkmark from '../resources/checkmark1.png';
+import warningmark from '../resources/warningmark2.png';
 
 class Results extends Component {
 
@@ -28,7 +30,7 @@ class Results extends Component {
             <div>
                 { !this.state.malicious ?
                     <Card className="Results" body>
-                        <CardImg className="resultsGraphic" top width="10%" src={require("../resources/checkmark1.png")}/>
+                        <CardImg className="resultsGraphic" top width="10%" src={checkmark}/>
                         <CardBody>
                             <h2>Looks Safe!</h2>
                             <p style={{textAlign: "center"}}>No threats have been detected.</p>
@@ -46,7 +48,7 @@ class Results extends Component {
                     </Card>
                 :
                     <Card className="Results" body>
-                        <CardImg className="resultsGraphic" top width="10%" src={require("../resources/warningmark2.png")} />
+                        <CardImg className="resultsGraphic" top width="10%" src={warningmark} />
                         <CardBody>
                             <h2>Looks Suspicious!</h2>
                             <p style={{textAlign: "center"}}>Possible threats have been detected with this submission</p>
@@ -62,10 +64,10 @@ class Results extends Component {
                                 </p>
 
                                 <h4 className='results-h4'>Threat Categories:</h4>
-                                <ul className='results-p'>
+                                <ul className='results-p results-ul'>
                                     {
-                                        this.state.categories.map(function(type) {
-                                            return <li>{type}</li>
+                                        this.state.categories.map((type) => {
+                                            return <li className='results-li'>{type.charAt(0).toUpperCase() + type.slice(1)}</li>
                                         })
                                     }
                                 </ul>

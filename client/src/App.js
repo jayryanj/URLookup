@@ -14,10 +14,15 @@ import {
   Input, 
   Button, 
   Spinner,
+  Modal,
+  ModalBody,
+  ModalHeader
 } from 'reactstrap';
 import Results from './components/Results';
+import laptop from './resources/laptop.png';
 const axios = require('axios');
 const validURL = require('valid-url');
+
 
 class App extends Component {
 
@@ -30,15 +35,8 @@ class App extends Component {
     this.onSubmit = this.onSubmit.bind(this);
     this.render = this.render.bind(this);
     this.callAPI = this.callAPI.bind(this);
+    this.toggle = this.toggle.bind(this);
 
-    /* TEST RESULTS
-    let testResults = {
-      verdict: {
-        malicious: false,
-        score: 100,
-        categories: ["malware", "phishing"]
-      }
-    } */
 
     // Used for the results card to prevent it from changing when a new submissions is entered
     this.submittedUrl = "";
@@ -47,7 +45,9 @@ class App extends Component {
         url: '', // TODO: set to '' after testing
         results: null, // TODO: Change to null after testing
         isLoading: false,
-        isValidUrl: true
+        isValidUrl: true,
+        isError: false,
+        errorMessage: undefined
     };
   }
 
@@ -70,14 +70,20 @@ class App extends Component {
     console.log(`Form submitted.`);
     console.log(`URL: ${this.state.url}`);
     
-    
-    let response = await axios.post('http://127.0.0.1:5000/api/lookup/', data, config);
+    try {
+      let response = await axios.post('http://127.0.0.1:5000/api/lookup/', data, config);
+      this.setState({results: response.data});
+  
+      // Trigger slide animation after loading
+      wrapper.classList.toggle("results-loaded");
+    } catch(error) {
+      this.setState({isError: true});
+      this.setState({results: null});
+      console.log(error)
+    }
 
-    this.setState({results: response.data});
     this.setState({isLoading: false});
 
-    // Trigger slide animation after loading
-    wrapper.classList.toggle("results-loaded");
   }
 
   async onSubmit(e) {
@@ -97,16 +103,30 @@ class App extends Component {
       this.setState({isValidUrl: true})
   }
 
+  toggle(e) {
+    this.setState({
+      isError: !this.state.isError
+    })
+  }
+
   render() {
+    let testResults = {
+      verdict: {
+        malicious: true,
+        score: 100,
+        categories: ["malware", "phishing"]
+      }
+    }
 
     // Results logic
     let resultsCard;
 
+    
     if(this.state.results == null && !this.state.isLoading) {
-      resultsCard = <img alt='laptop-graphic' className='laptop-image' src={require("./resources/laptop.png")} />
+      resultsCard = <img alt='laptop-graphic' className='laptop-image' src={laptop} />
     } else {
       if(this.state.isLoading) {
-        resultsCard = <Spinner className="resultsLoading" style={{ width: '3rem', height: '3rem' }} /> 
+        resultsCard = <Spinner className="results-loading" style={{ width: '8rem', height: '8rem' }} /> 
       } else {
         resultsCard = <Results url={this.submittedUrl} results={this.state.results} />
       }
@@ -123,6 +143,13 @@ class App extends Component {
 
           </Nav>
         </Navbar>
+
+        <Modal isOpen={this.state.isError} toggle={this.toggle}>
+          <ModalHeader toggle={this.toggle}>URL Not Found</ModalHeader>
+          <ModalBody>
+            The URL that you submitted was not found and could not be processed. There may be an error with the URL, or the resource may no longer be available.
+          </ModalBody>
+        </Modal>
 
           <Row>
 
@@ -151,9 +178,11 @@ class App extends Component {
                         }
                         {
                           this.state.isLoading ? 
-                            <Spinner className="buttonLoading" style={{ width: '3rem', height: '3rem' }} /> 
+                            <Button disabled className="pull-left inputButton" size="lg">
+                              Loading...
+                            </Button>
                           : 
-                            <Button type="submit" className="pull-left inputButton" size="lg">
+                            <Button type="submit" className="pull-left inputButton active-button" size="lg">
                               Submit
                             </Button>
                         }
@@ -164,7 +193,7 @@ class App extends Component {
             </Col>
 
             <Col lg className='column2'>
-              <Container>
+              <Container className="results-container">
                 <div ref={this.wrapperRef}>
                   {resultsCard}
                 </div>

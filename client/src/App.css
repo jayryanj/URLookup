@@ -83,7 +83,7 @@ h1 {
   border-width: 0px !important;
 }
 
-.inputButton:hover {
+.inputButton.active-button:hover {
   background-color: #807365 !important;
   box-shadow: none !important;
   color: #b9c3c7 !important;

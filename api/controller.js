@@ -32,7 +32,8 @@ router.post('/lookup/', (request, response) => {
             response.status(OK).json(results)
         })
         .catch(error => {
-            response.status(BAD_REQUEST).json({success: false})
+            console.error(`${new Date(Date.now())} - Error: ${error}`);
+            response.status(BAD_REQUEST).json({success: false, message: error})
         })
 })
 

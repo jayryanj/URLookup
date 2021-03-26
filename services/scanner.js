@@ -23,44 +23,19 @@ async function scan(url) {
     console.log(submitResults.data);
   
     // Retrieve the scan results of the URL from results API
-    try {
+    let scanResults = await resultsAPI(submitResults.data.api, 25000);
   
-      let scanResults = await resultsAPI(submitResults.data.api, 25000);
-  
-      response = {
-        success: true,
-        verdict: scanResults.data.verdicts.overall,
-        location: scanResults.data.meta.processors.geoip.data
-      }
-  
-      return response;
-  
-    } catch(error) {
-  
-      console.log(`${new Date(Date.now())} - Call failed, retrying...`);
-  
-      try {
-  
-        let ScanResults = await resultsAPI(submitResults.data.api, 10000);
-  
-        response = {
-          verdict: scanResults.data.verdicts.overall,
-          location: scanResults.data.meta.processors.geoip.data
-        }
-  
-        return response;
-  
-      } catch(error) {
-  
-        console.log(`${new Date(Date.now())} - Unsuccessful call:\n${error}`)
-  
-        return {success: false};
-      }
-  
+    response = {
+      success: true,
+      verdict: scanResults.data.verdicts.overall,
+      location: scanResults.data.meta.processors.geoip.data
     }
+  
   } catch (error) {
-    console.log(`${new Date(Date.now())} - Unsuccessful call:\n${error}`)
+    throw "URL could not be resolved."
   }
+
+  return response;
 
 }
 
@@ -72,7 +47,7 @@ async function scan(url) {
  * @param       {String} url - The URL received from the user to scan.
  * @returns     {Promise} Promise for response from the urlscan.io API
  */
-function submitAPI(url) {
+async function submitAPI(url) {
   const config = {
     headers: {
       "Content-Type": "application/json",
@@ -86,8 +61,9 @@ function submitAPI(url) {
   };
 
   console.log(`${new Date(Date.now())} - Sending request to urlscan.io submission API`)
+  let submission = await axios.post("https://urlscan.io/api/v1/scan/", data, config)
 
-  return axios.post("https://urlscan.io/api/v1/scan/", data, config);;
+  return submission;
 }
 
 /**
@@ -96,7 +72,7 @@ function submitAPI(url) {
  */
 async function resultsAPI(url, ms) {
   
-  // Uses a promise to return the value from the callback passed to setTimeout
+  // Return a promise that will resolve to the 
   return new Promise(resolve => {
 
     console.log(`${new Date(Date.now())} - Waiting ${ms/1000}s for urlscan.io to generate results`)
