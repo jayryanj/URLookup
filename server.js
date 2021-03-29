@@ -28,6 +28,9 @@ app.get("*", (request, response) => {
   response.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
 })
 
+const port = process.env.PORT || '8080';
+app.set('port', port)
+
 // Remove this once Mongo is implemented
-app.listen(process.env.PORT, () => console.log(`${new Date(Date.now())} - Listening on port: ${process.env.PORT}`));
+app.listen(port, () => console.log(`${new Date(Date.now())} - Listening on port: ${port}`));
 
