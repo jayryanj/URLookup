@@ -1,4 +1,4 @@
-// Useless for now
+// Useless for now until Redux is implemented
 
 import React, { Component } from 'react';
 import { Input, Container, Form, InputGroup, Button } from 'reactstrap';
@@ -14,8 +14,8 @@ class Search extends Component {
 
         this.state = {
             url: '',
-            isLoading = false;
-            isDone = false;
+            isLoading = false,
+            isDone = false
         };
     }
 

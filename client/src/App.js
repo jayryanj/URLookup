@@ -16,7 +16,8 @@ import {
   Spinner,
   Modal,
   ModalBody,
-  ModalHeader
+  ModalHeader,
+  FormFeedback
 } from 'reactstrap';
 import Results from './components/Results';
 import laptop from './resources/laptop.png';
@@ -173,7 +174,9 @@ class App extends Component {
                           :
                           <InputGroup>
                             <Input invalid onChange={this.onChangeUrl} bsSize="lg" placeholder="https://www.example.com/..." />
-                            
+                            <FormFeedback className="input-feedback">
+                              <p>Invalid URL (Note: the URL must contain http:// or https://)</p>
+                            </FormFeedback>
                           </InputGroup>
                         }
                         {
