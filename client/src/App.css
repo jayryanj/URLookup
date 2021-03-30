@@ -31,6 +31,12 @@ input {
   font-family: Montserrat-regular;
 }
 
+.input-feedback {
+  margin-left: 10% !important;
+  font-size: 20px !important;
+  color: #df7272 !important;
+}
+
 input:focus, input:active, input:hover {
   outline: 0px !important;
   -webkit-appearance: none;
