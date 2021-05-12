@@ -3,13 +3,15 @@
 URLookup is a web app designed to check a website URL for threats by wrapping around urlscan.io's API for simple and concise results. 
 
 ## Deployment
-URLookup is pending deployment.
+URLookup is deployed to AWS Elastic Beanstalk.
+[Link](http://www.urlookup.com/)
 
 ## Technologies
 - Node.js
 - Express.js
 - React
 - Bootstrap
+- AWS
 
 ## How to Contribute
 Fork the repo, clone it to your local machine, then run:
