@@ -1,10 +1,9 @@
 # URLookup
 ## Description
-URLookup is a web app designed to check a website URL for threats by wrapping around urlscan.io's API for simple and concise results. 
+URLookup is a single-page web app designed to check a website URL for threats by wrapping around urlscan.io's API for simple and concise results. Scanning a URL for threats can be a difficult task for non-technical users. Services such as urlscan.io, Hybrid Analysis, and VirusTotal can be overwhelming with the amount of information that they provide. It can be difficult for normal users to determine if their link is safe or not. URLookup aims to provide a clear and concise verdict by stating that a URL is safe, suspicious, or dangerous.
 
 ## Deployment
-URLookup is deployed to AWS Elastic Beanstalk.
-[Link](http://www.urlookup.com/)
+URLookup was deployed to AWS Elastic Beanstalk. However, it has since been removed.
 
 ## Technologies
 - Node.js
